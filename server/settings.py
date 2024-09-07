@@ -77,16 +77,6 @@ WSGI_APPLICATION = 'server.wsgi.application'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 
-
-
-# DATABASE_URL = 'postgres://sqwbdnhcvyqksi:385a2a3596419f3ebdefc6453b8b600e151320587a80f9352e4923e483a2484b@ec2-54-156-8-21.compute-1.amazonaws.com:5432/d4sdqag7s8bqvb'
-# db_config = dj_database_url.config(default=DATABASE_URL, conn_max_age=600)
-
-# DATABASES = {
-#     'default': db_config
-# }
-
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -211,7 +201,7 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",
     "http://127.0.0.1:5173",
     "http://127.0.0.1:8000",
-    "https://studentnest-eb6a68a9526b.herokuapp.com",
+    "https://health-wellness-0bdd7416387d.herokuapp.com",
     
    
 ]
@@ -219,7 +209,7 @@ CORS_ALLOWED_ORIGINS = [
 CSRF_TRUSTED_ORIGINS = [
     'http://localhost:3000',
     "http://127.0.0.1:8000",
-    "https://studentnest-eb6a68a9526b.herokuapp.com",
+   " https://health-wellness-0bdd7416387d.herokuapp.com"
 ]
 CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOW_CREDENTIALS = True
