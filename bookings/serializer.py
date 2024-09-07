@@ -16,20 +16,10 @@ class BookingSerializer(ModelSerializer):
         return response
 
 
-
 class ContactusSerializer(ModelSerializer):
     class Meta:
         model = ContactUs
         fields = "__all__"
-
-
-class HelpInTransportationSerializer(ModelSerializer):
-    class Meta:
-        model = HelpTransportation
-        fields = "__all__"
-
-
-
 
 class PaymentSerializer(ModelSerializer):
     class Meta:

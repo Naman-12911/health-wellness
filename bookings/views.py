@@ -114,27 +114,6 @@ class ContactUsAPIView(APIView):
         return response
     
 
-class HelpTransportationAPIView(APIView):
-    permission_classes = [IsAuthenticated]
-    def post(self, request, format=None):
-        data = request.data
-        serializer = HelpInTransportationSerializer(data=data)
-
-
-        serializer.is_valid(raise_exception=True)
-
-        serializer.save()
-        response = Response()
-
-        response.data = {
-            'message': 'Help in transportation Created Successfully',
-            'data': serializer.data
-        }
-
-        return response
-    
-
-
 class PaymentAPIView(APIView):
     permission_classes = [IsAuthenticated]
     def post(self, request, format=None):

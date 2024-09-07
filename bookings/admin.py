@@ -16,5 +16,4 @@ class ContactAdmin(ImportExportModelAdmin):
     search_fields=("user","email","name",)
 admin.site.register(Booking,BookingAdmin)
 admin.site.register(ContactUs,ContactAdmin)
-admin.site.register(HelpTransportation)
 admin.site.register(payment,paymentAdmin)
