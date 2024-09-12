@@ -1,6 +1,7 @@
 from rest_framework.serializers import  ModelSerializer
-from .models import Listing
+from .models import Listing,Cart
 from django.contrib.sites.shortcuts import get_current_site
+from account.serializer import UserSerializers
 
 
 class ListingsSerializer(ModelSerializer):
@@ -28,3 +29,15 @@ class ListingsSerializer(ModelSerializer):
             # If request is not available (for example, in shell), use the default site
             site = get_current_site(None)
             return f"{site.scheme}://{site.domain}{image_path}"
+        
+        
+class CartSerializer(ModelSerializer):
+    class Meta:
+        model = Cart
+        fields = "__all__"
+    def to_representation(self, instance):
+        response = super().to_representation(instance)
+        response['product'] = ListingsSerializer(instance.product).data
+        response['user'] = UserSerializers(instance.user).data
+        
+        return response

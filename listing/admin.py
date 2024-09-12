@@ -9,3 +9,4 @@ class ListingAdmin(ImportExportModelAdmin):
     search_fields = ("title",)
 
 admin.site.register(Listing,ListingAdmin)
+admin.site.register(Cart)

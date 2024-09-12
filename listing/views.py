@@ -1,7 +1,7 @@
 from django.shortcuts import render
 
-from listing.serializer import ListingsSerializer
-from .models import Listing
+from listing.serializer import ListingsSerializer,CartSerializer
+from .models import Listing,Cart
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -57,8 +57,43 @@ class ListingSearchView(generics.ListAPIView):
         serializer = self.get_serializer(queryset, many=True)
         return Response(serializer.data)
 
+class CartAPIView(APIView):
+    permission_classes = [IsAuthenticated]
+    def get_object(self, pk):
+        try:
+            return Cart.objects.get(pk=pk)
+        except Cart.DoesNotExist:
+            raise Http404
+    def get(self, request, pk=None, format=None):
+        current_user = request.user
+        if pk:
+            data = self.get_object(pk)
+            serializer = CartSerializer(data)
+            return Response(serializer.data)
+        else:
+            data = Cart.objects.filter(user=current_user)
+            serializer = CartSerializer(data, many=True)
+            if not data.exists():
+                return Response({'detail': 'Get all cart items'}, status=status.HTTP_404_NOT_FOUND)
+            return Response(serializer.data)
+    def post(self, request, format=None):
+            current_user = request.user
+            mutable_data = request.data.copy()
+            mutable_data['user'] = current_user.id 
+            
+            serializer = CartSerializer(data=mutable_data)
 
+            # Check if the data passed is valid
+            serializer.is_valid(raise_exception=True)
+            serializer.save()
+            # Return Response to User
 
+            response = Response()
 
+            response.data = {
+                'message': 'cart Created Successfully',
+                'data': serializer.data
+            }
+            return response
 
 

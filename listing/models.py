@@ -1,5 +1,6 @@
 from django.db import models
 from datetime import datetime
+from account.models import User
 # Create your models here.
 
 
@@ -19,3 +20,8 @@ class Listing(models.Model):
     list_date = models.DateTimeField(default=datetime.now, blank=True)
     def __str__(self):
         return self.title
+    
+class Cart(models.Model):
+    user = models.ForeignKey(User,models.CASCADE,null=True,blank=True)
+    product = models.ForeignKey(Listing,models.CASCADE,null=True,blank=True)
+    
