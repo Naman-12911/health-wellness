@@ -11,6 +11,7 @@ class Booking(models.Model):
     name = models.CharField(max_length=100)
     phone_no = models.BigIntegerField()
     email = models.CharField(max_length=100)
+    quantity = models.IntegerField(null=True,blank=True)
     def __str__(self):
         return self.name
     
